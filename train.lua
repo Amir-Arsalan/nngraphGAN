@@ -88,7 +88,7 @@ for t,v in ipairs(indices) do
 
         local error_grads = {dGANReal_dw, dGANFake_dw, dGAN_dwGen}
 
-        model:backward(inputs, error_grads)
+        gMod:backward(inputs, error_grads)
         local batchError = errReal + errFake
 
         return batchError, gParams
