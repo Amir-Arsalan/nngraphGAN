@@ -73,11 +73,10 @@ for t,v in ipairs(indices) do
 			params:copy(x)
 		end
 
-		gMod:zeroGradParameters()
+	gMod:zeroGradParameters()
+	local disReal, disFake, disGen = unpack(model:forward(inputs))
 
-		local disReal, disFake, disGen = unpack(model:forward(inputs))
-
-		local errReal = GANCriterionReal:forward(disReal, GANLabelsDisReal)
+	local errReal = GANCriterionReal:forward(disReal, GANLabelsDisReal)
         local dGANReal_dw = GANCriterionReal:backward(disReal, GANLabelsDisReal)
 
         local errFake = GANCriterionFake:forward(disFake, GANLabelsDisFake)
