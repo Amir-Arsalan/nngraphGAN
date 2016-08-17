@@ -1,6 +1,7 @@
 require 'nngraph'
 require 'nn'
 require 'subnetworkBuilder'
+require 'optim'
 
 -- The generator gets a vector of length 200, a linear layer maps it into a vector of length 2560. Then reshaped to 40 x 8 x 8 features maps and the rest is conv layers
 gen = subnetworkBuilder.get_generator()
