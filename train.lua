@@ -65,7 +65,7 @@ config = {learningRate = 0.01}
 
 for t,v in ipairs(indices) do
 	noise:normal(0, 1)
-	inputs = {data:index(1,v), noise}
+	local inputs = {data:index(1,v), noise}
 
 	local opfunc = function(x)
 		if x ~= params then
@@ -74,21 +74,21 @@ for t,v in ipairs(indices) do
 
 		gMod:zeroGradParameters()
 
-		disReal, disFake, disGen = unpack(model:forward(inputs))
+		local disReal, disFake, disGen = unpack(model:forward(inputs))
 
-		errReal = GANCriterionReal:forward(disReal, GANLabelsDisReal)
-        dGANReal_dw = GANCriterionReal:backward(disReal, GANLabelsDisReal)
+		local errReal = GANCriterionReal:forward(disReal, GANLabelsDisReal)
+        local dGANReal_dw = GANCriterionReal:backward(disReal, GANLabelsDisReal)
 
-        errFake = GANCriterionFake:forward(disFake, GANLabelsDisFake)
-        dGANFake_dw = GANCriterionFake:backward(disFake, GANLabelsDisFake)
+        local errFake = GANCriterionFake:forward(disFake, GANLabelsDisFake)
+        local dGANFake_dw = GANCriterionFake:backward(disFake, GANLabelsDisFake)
 
-        errGen = GANCriterionGen:forward(disGen, GANLabelsGen)
-        dGAN_dwGen = GANCriterionGen:backward(disGen, GANLabelsGen)
+        local errGen = GANCriterionGen:forward(disGen, GANLabelsGen)
+        local dGAN_dwGen = GANCriterionGen:backward(disGen, GANLabelsGen)
 
-        error_grads = {dGANReal_dw, dGANFake_dw, dGAN_dwGen}
+        local error_grads = {dGANReal_dw, dGANFake_dw, dGAN_dwGen}
 
         model:backward(inputs, error_grads)
-        batchError = errReal + errFake
+        local batchError = errReal + errFake
 
         return batchError, gParams
 	end
