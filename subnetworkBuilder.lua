@@ -11,7 +11,7 @@ function subnetworkBuilder.get_generator()
 end
 
 function subnetworkBuilder.get_discriminator()
-  local generator = nn.Sequential()
+  local discriminator = nn.Sequential()
   -- Add layers of your own interest
   
   return discriminator
