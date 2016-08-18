@@ -69,12 +69,12 @@ for t,v in ipairs(indices) do
 	local inputs = {data:index(1,v), noise}
 
 	local opfunc = function(x)
-		if x ~= params then
-			params:copy(x)
-		end
+	if x ~= params then
+		params:copy(x)
+	end
 
 	gMod:zeroGradParameters()
-	local disReal, disFake, disGen = unpack(model:forward(inputs))
+	local disReal, disFake, disGen = unpack(gMod:forward(inputs))
 
 	local errReal = GANCriterionReal:forward(disReal, GANLabelsDisReal)
         local dGANReal_dw = GANCriterionReal:backward(disReal, GANLabelsDisReal)
